@@ -17,15 +17,15 @@ gu install native-image
 To create the image, run the following goal:
 
 ```
-$ ./gradlew bootBuildImage
+./gradlew bootBuildImage
 ```
 
 ## Run
 ### Dev mode
 ```
-$ ./gradlew bootRun
+./gradlew bootRun
 ```
 ### Prod mode
 ```
-$ docker run --rm demo:0.0.1-SNAPSHOT
+docker run --rm demo:0.0.1-SNAPSHOT
 ```
