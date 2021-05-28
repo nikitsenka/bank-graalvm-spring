@@ -1,5 +1,5 @@
 # About
-Sampl bank application witten in reactive Spring Webflux and packaged as GraalVM native executable. 
+Sample bank application witten in reactive Spring Webflux and packaged as GraalVM native executable. 
 
 ## Build
 
