@@ -19,6 +19,12 @@ To create the image, run the following goal:
 ```
 ./gradlew bootBuildImage
 ```
+## Run DB locally
+
+```
+docker build --no-cache -t bank-postgres-db ./docker/db/
+docker run --name bank-postgres-db -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d bank-postgres-db
+```
 
 ## Run
 ### Dev mode
@@ -28,4 +34,8 @@ To create the image, run the following goal:
 ### Prod mode
 ```
 docker run --rm demo:0.0.1-SNAPSHOT
+```
+### Test
+```
+ curl -X GET http://localhost:8080/client/0/balance 
 ```
