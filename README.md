@@ -36,6 +36,15 @@ docker run --name bank-postgres-db -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d
 docker run --rm demo:0.0.1-SNAPSHOT
 ```
 ### Test
+Create client
+```
+ curl -X POST http://localhost:8080/client/new/100 
+```
+Get balance
 ```
  curl -X GET http://localhost:8080/client/0/balance 
+```
+Add Money
+```
+ curl -H "Content-type: application/json" -X POST http://localhost:8080/transaction  -d '{"amount":1000,"from_client_id":0,"to_client_id":1}'
 ```
