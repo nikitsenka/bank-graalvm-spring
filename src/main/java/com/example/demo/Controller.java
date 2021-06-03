@@ -17,11 +17,13 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 import static reactor.core.scheduler.Schedulers.boundedElastic;
 
-@Component
 public class Controller {
 
-    @Autowired
-    private BankPostgresRepository bankPostgresRepository;
+    private final BankPostgresRepository bankPostgresRepository;
+
+    public Controller(BankPostgresRepository bankPostgresRepository) {
+        this.bankPostgresRepository = bankPostgresRepository;
+    }
 
     public RouterFunction<ServerResponse> router() {
         return nest(path("/"), route()

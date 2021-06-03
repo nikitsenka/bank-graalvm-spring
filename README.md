@@ -33,7 +33,7 @@ docker run --name bank-postgres-db -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d
 ```
 ### Prod mode
 ```
-docker run --rm demo:0.0.1-SNAPSHOT
+docker run --rm -p 8080:8080 bank-graalvm-spring:0.0.1-SNAPSHOT
 ```
 ### Test
 Create client

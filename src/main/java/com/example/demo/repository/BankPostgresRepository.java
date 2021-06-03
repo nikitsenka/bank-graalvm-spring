@@ -5,18 +5,18 @@ import com.example.demo.model.Client;
 import com.example.demo.model.Transaction;
 import io.r2dbc.spi.Connection;
 import io.r2dbc.spi.ConnectionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
-@Repository
 public class BankPostgresRepository {
     public static final String GET_BALANCE_SQL = "SELECT debit - credit FROM (SELECT COALESCE(sum(amount), 0) AS debit FROM transaction WHERE to_client_id = $1 ) a, ( SELECT COALESCE(sum(amount), 0) AS credit FROM transaction WHERE from_client_id = $1 ) b;";
     public static final String INSERT_CLIENT_SQL = "INSERT INTO client(name, email, phone) VALUES ($1, $2, $3) RETURNING id";
     public static final String INSERT_TRANSACTION_SQL = "INSERT INTO transaction(from_client_id, to_client_id, amount) VALUES ($1, $2, $3) RETURNING id";
 
-    @Autowired
-    private ConnectionFactory connectionFactory;
+    private final ConnectionFactory connectionFactory;
+
+    public BankPostgresRepository(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     public Mono<Balance> getBalance(Integer clientId) {
         return Mono.from(connectionFactory.create())
