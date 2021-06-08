@@ -1,0 +1,35 @@
+version: '3.5'
+
+services:
+
+  bank-graalvm-spring:
+    container_name: bank-graalvm-spring
+    build: .
+    image: bank-graalvm-spring:0.0.1-SNAPSHOT
+    networks:
+      - bank-network
+    ports:
+      - "8080:8080"
+    environment:
+      POSTGRES_HOST: database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    depends_on:
+      - database
+
+  database:
+    container_name: bank-postgres-db
+    image: bank-postgres-db
+    networks:
+      - bank-network
+    build: ./docker/db/
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+networks:
+  bank-network:
+    name: bank-global-net
